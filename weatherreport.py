@@ -1,12 +1,14 @@
 
 
 def sensorStub():
-    return {
-        'temperatureInC': 50,
-        'precipitation': 70,
-        'humidity': 26,
-        'windSpeedKMPH': 52
-    }
+    if data is None:
+        data = {
+            'temperatureInC': 50,
+            'precipitation': 70,
+            'humidity': 26,
+            'windSpeedKMPH': 52
+        }
+    return data
 
 
 def report(sensorReader):
@@ -22,17 +24,29 @@ def report(sensorReader):
 
 
 def testRainy():
-    weather = report(sensorStub)
+    weather = report(lambda: sensorStub({
+        'temperatureInC': 50,
+        'precipitation': 70,
+        'humidity': 26,
+        'windSpeedKMPH': 52
+    }))    
     print(weather)
-    assert("rain" in weather)
+    assert("Alert" in weather, "Bug not exposed: should alert stormy weather")
 
 
 def testHighPrecipitation():
     # This instance of stub needs to be different-
     # to give high precipitation (>60) and low wind-speed (<50)
 
-    weather = report(sensorStub)
-
+    weather = report(lambda: sensorStub({
+        'temperatureInC': 50,
+        'precipitation': 50,
+        'humidity': 26,
+        'windSpeedKMPH': 30
+    }))
+    
+    print(weather)
+    assert("Cloudy" in weather, "Bug not exposed: Should be partly cloudy")
     # strengthen the assert to expose the bug
     # (function returns Sunny day, it should predict rain)
     assert(len(weather) > 0);
