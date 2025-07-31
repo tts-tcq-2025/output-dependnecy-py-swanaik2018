@@ -31,7 +31,7 @@ def testRainy():
         'windSpeedKMPH': 52
     }))    
     print(weather)
-    assert("Alert" in weather, "Bug not exposed: should alert stormy weather")
+    assert "Alert" in weather, "Bug not exposed: should alert stormy weather"
 
 
 def testHighPrecipitation():
@@ -46,7 +46,7 @@ def testHighPrecipitation():
     }))
     
     print(weather)
-    assert("Cloudy" in weather, "Bug not exposed: Should be partly cloudy")
+    assert "Cloudy" in weather, "Bug not exposed: Should be partly cloudy"
     # strengthen the assert to expose the bug
     # (function returns Sunny day, it should predict rain)
     assert(len(weather) > 0);
