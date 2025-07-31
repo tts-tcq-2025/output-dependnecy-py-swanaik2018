@@ -40,7 +40,7 @@ def testHighPrecipitation():
 
     weather = report(lambda: sensorStub({
         'temperatureInC': 50,
-        'precipitation': 50,
+        'precipitation': 70,
         'humidity': 26,
         'windSpeedKMPH': 30
     }))
