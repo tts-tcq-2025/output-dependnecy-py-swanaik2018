@@ -1,6 +1,6 @@
 
 
-def sensorStub():
+def sensorStub(data = None):
     if data is None:
         data = {
             'temperatureInC': 50,
